@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+    <title>Quick API Demo</title>
+    <meta charset="UTF-8">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./static/utils.js"></script>
+    <script type="text/javascript" src="./static/predict.js"></script>
+    <script type="text/javascript" src="./static/webcam.js"></script>
+    <script type="text/javascript" src="./static/graph.js"></script>
+    <style>
+        .login-form-1 h3{
+            text-align: center;
+            color: #333;
+        }
+        .login-container form{
+            padding: 10%;
+        }
+        #player{
+            display: inline-block;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        #canvas{
+            display: none;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .form-control{
+            width:50%;
+        }
+        .input-group{
+            width:500px;
+            padding-top: 5px;
+        }
+        #resultBox, #curlBox{
+            width: 100%;
+            border-radius: 7px;
+            background-color: #41444E;
+            color: white;
+            margin-top: 5px;
+            padding: 20px;
+            display: none;
+        }
+
+        #resultBox{
+            background-color: whitesmoke;
+            color: black;
+        }
+        .btn-primary {
+            margin: auto;
+        }
+        .bar {
+            fill: #5f89ad;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            display: none;
+        }
+
+        .label,
+        .axis {
+            font-size: 13px;
+            color: white;
+        }
+        #graphic{
+            padding: 5px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quick API Demo</h1>
+        <div id="radioGroup" class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" value="image" checked="true">Image
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" value="pose" id="option2">Pose
+            </label>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">URL</span>
+            </div>
+            <input id="url" type="text" class="form-control" size="10" placeholder="Your Model URL *" value="https://teachablemachine.withgoogle.com/models/fmTqHH1jX/" />
+        </div>
+        <div>
+            <video autoplay="" id="player" width="400" height="300"></video>
+            <canvas id="canvas" width="400" height="300"></canvas>
+        </div>
+        <div>
+            <button type="button" id="webcamBtn" class="btn btn-primary">Capture</button>
+            <button type="button" id="requestBtn" class="btn btn-primary" onclick="predict()" disabled>Request</button>
+        </div>
+        <div>
+            <div id="curlBox">
+                <h3>Curl</h3>
+                <p id="curl"></p>
+            </div>
+            <div id="resultBox">
+                <h3>Result</h3>
+                <p id="result"></p>
+                <div id="graphic"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    initWebcam();
+</script>
+</body>
+
+</html>
