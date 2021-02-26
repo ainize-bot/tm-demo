@@ -21,12 +21,12 @@ function _predict() {
 
   let apiserver;
   if (mode==='image') {
-    apiserver = 'http://localhost:8080';
+    apiserver = 'http://tm.e.ainize.ai/api/image/predict';
   } else {
-    apiserver = 'http://localhost:8000';
+    apiserver = 'http://tm.e.ainize.ai/api/pose/predict';
   }
   fetch(
-    apiserver + '/predict',
+    apiserver,
     {
       method: "POST",
       body: formData,
@@ -37,7 +37,7 @@ function _predict() {
       console.log(response)
 
       drawGraph(response);
-      document.getElementById('curl').innerText = makeCurl(apiserver+'/predict', url, image);
+      document.getElementById('curl').innerText = makeCurl(apiserver, url, image);
 
       turnOn(document.getElementById('resultBox'));
       turnOn(document.getElementById('curlBox'));
