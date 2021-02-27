@@ -10,7 +10,17 @@ function _predict() {
   turnOff(document.getElementById('curlBox'));
   const canvas = document.getElementById('canvas');
 
-  const url = document.getElementById('url').value.trim();
+  if (!document.getElementById('url').value) {
+    btnOff(document.getElementById('requestBtn'), false);
+    btnOff(document.getElementById('webcamBtn'), false);
+    return;
+  }
+
+  let url = document.getElementById('url').value.trim();
+  if (!url.endsWith('/')) {
+    url += '/';
+    document.getElementById('url').value = url;
+  }
   let image = canvas.toDataURL();
   image = dataURLtoFile(image)
 
@@ -21,10 +31,12 @@ function _predict() {
 
   let apiserver;
   if (mode==='image') {
-    apiserver = 'http://tm.e.ainize.ai/api/image/predict';
+    apiserver = 'https://tm.e.ainize.ai/api/image/predict';
   } else {
-    apiserver = 'http://tm.e.ainize.ai/api/pose/predict';
+    apiserver = 'https://tm.e.ainize.ai/api/pose/predict';
   }
+  document.getElementById('curl').innerText = makeCurl(apiserver, url, image);
+  turnOn(document.getElementById('curlBox'));
   fetch(
     apiserver,
     {
@@ -37,10 +49,8 @@ function _predict() {
       console.log(response)
 
       drawGraph(response);
-      document.getElementById('curl').innerText = makeCurl(apiserver, url, image);
 
       turnOn(document.getElementById('resultBox'));
-      turnOn(document.getElementById('curlBox'));
       btnOff(document.getElementById('requestBtn'), false);
       btnOff(document.getElementById('webcamBtn'), false);
       console.log('DONE');

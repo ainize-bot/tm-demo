@@ -32,7 +32,7 @@
             width:50%;
         }
         .input-group{
-            width:500px;
+            width:600px;
             padding-top: 5px;
         }
         #resultBox, #curlBox{
@@ -74,18 +74,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>Quick API Demo</h1>
+        <h1>Teachable Machine API - Quick Demo</h1>
         <div id="radioGroup" class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
+            <label class="btn btn-secondary active" onclick="model_type_changed('image', this)">
                 <input type="radio" name="options" id="option1" value="image" checked="true">Image
             </label>
-            <label class="btn btn-secondary">
+            <label class="btn btn-secondary" onclick="model_type_changed('pose', this);">
                 <input type="radio" name="options" value="pose" id="option2">Pose
             </label>
         </div>
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">URL</span>
+                <span class="input-group-text" id="inputGroup-sizing-sm">MODEL URL</span>
             </div>
             <input id="url" type="text" class="form-control" size="10" placeholder="Your Model URL *" value="https://teachablemachine.withgoogle.com/models/fmTqHH1jX/" />
         </div>

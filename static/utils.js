@@ -33,3 +33,21 @@ function makeCurl(serverUrl, modelUrl, image) {
   return `curl -X POST ${serverUrl} -H "accept: application/json" -H 
   "Content-Type: multipart/form-data" -F "image=@${imageName};type=${imageType}" -F "url=${modelUrl}"`;
 }
+
+var previous_model_type = 'image';
+var previous_model_urls = {
+  image: 'https://teachablemachine.withgoogle.com/models/fmTqHH1jX/',
+  pose: 'https://storage.googleapis.com/tm-models/QDvGMpQt/',
+};
+
+function model_type_changed(new_model_type) {
+  console.log(new_model_type);
+  var current_model_url = document.getElementById('url').value;
+  if (previous_model_type !== new_model_type) {
+    previous_model_urls[previous_model_type] = current_model_url;
+  }
+  document.getElementById('url').value = previous_model_urls[new_model_type];
+  previous_model_type = new_model_type;
+  turnOff(document.getElementById('resultBox'));
+  turnOff(document.getElementById('curlBox'));
+}
